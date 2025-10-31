@@ -1,0 +1,10 @@
+.all{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .agrupamento{
+        display: flex;
+        flex-direction: column;
+    }
+}

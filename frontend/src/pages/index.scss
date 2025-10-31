@@ -1,0 +1,19 @@
+.jovem-b{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 140px;
+
+    h1{
+        margin-top: 100px;
+    }
+
+    a{
+        padding: 20px 50px;
+        border: 2px solid black;
+        text-decoration: none;
+        color: black;
+        background-color: rgb(197, 197, 197);
+    }
+}
