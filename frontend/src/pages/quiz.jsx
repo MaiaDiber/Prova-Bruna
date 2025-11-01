@@ -1,46 +1,112 @@
-
-
+import { useState } from 'react';
+import './Quiz.scss';
 
 export default function Quiz() {
+    const [selectedProblems, setSelectedProblems] = useState([]);
+    const [showResults, setShowResults] = useState(false);
+
+    const problemsData = [
+        { 
+            name: 'Depressão',
+            advice: 'A depressão pode fazer você se sentir sem energia. Tente estabelecer pequenas metas diárias e comemore cada conquista. Não hesite em buscar ajuda profissional - a terapia pode fazer uma grande diferença.'
+        },
+        { 
+            name: 'Ansiedade',
+            advice: 'A ansiedade muitas vezes vem de preocupações com o futuro. Tente focar no presente através de exercícios de respiração. Limitar o consumo de notícias e redes sociais também pode ajudar a reduzir a sobrecarga.'
+        },
+        { 
+            name: 'Bullying',
+            advice: 'Lembre-se que o bullying diz mais sobre quem pratica do que sobre você. Converse com alguém de confiança e registre os incidentes. Você não está sozinho e merece respeito.'
+        },
+        { 
+            name: 'Insônia',
+            advice: 'Crie uma rotina relaxante antes de dormir: evite telas, tome um chá calmante e leia um livro. Manter horários consistentes para dormir e acordar ajuda a regular seu relógio biológico.'
+        },
+        { 
+            name: 'Problemas com a Família',
+            advice: 'A comunicação aberta e respeitosa é fundamental. Tente expressar seus sentimentos usando "eu sinto" em vez de acusações. Às vezes, um mediador profissional pode ajudar a resolver conflitos.'
+        },
+        { 
+            name: 'Remorso',
+            advice: 'Todos cometemos erros - isso nos torna humanos. Aprenda com a experiência e pratique o autoperdão. Se possível, faça as pazes com as pessoas envolvidas.'
+        },
+        { 
+            name: 'Procrastinação',
+            advice: 'Divida tarefas grandes em partes menores de 5-10 minutos. Use a técnica Pomodoro: 25 minutos de foco, 5 minutos de pausa. Remova distrações e recompense seu progresso.'
+        },
+        { 
+            name: 'Raiva',
+            advice: 'Antes de reagir, respire fundo e conte até 10. Identifique o que realmente desencadeou sua raiva. Atividade física pode ajudar a liberar a tensão de forma saudável.'
+        }
+    ];
+
+    const handleSelect = (problemName) => {
+        setSelectedProblems(prev => {
+            if (prev.includes(problemName)) {
+                return prev.filter(p => p !== problemName);
+            } else {
+                return [...prev, problemName];
+            }
+        });
+    };
+
+    const handleSubmit = () => {
+        if (selectedProblems.length > 0) {
+            setShowResults(true);
+        }
+    };
+
     return (
-        <>
-        <section className="all">
+        <div className="quiz">
+            <h1>Como você está se sentindo?</h1>
 
-            <h1>Podemos te ajudar em alguns desses problemas? Ajude a nos ajuda-lo.</h1>
+            {!showResults ? (
+                <>
+                    <div className="problems">
+                        {problemsData.map(problem => (
+                            <div 
+                                key={problem.name}
+                                className={`problem ${selectedProblems.includes(problem.name) ? 'selected' : ''}`}
+                                onClick={() => handleSelect(problem.name)}
+                            >
+                                <input 
+                                    type="checkbox" 
+                                    checked={selectedProblems.includes(problem.name)}
+                                    readOnly
+                                />
+                                <span>{problem.name}</span>
+                            </div>
+                        ))}
+                    </div>
 
-            <div className="agrupamento">
-                <label>
-                    <input type="radio" /> <p>Depressão</p>
-                </label>
-                <label>
-                    <input type="radio" /> <p>Ansiedade</p>
-                    </label>
-                    <label>
-                        <input type="radio" /> <p>Bullyng</p>
-                        </label>
-                        <label>
-                            <input type="radio" /> <p>Insônia</p>
-                            </label>
-                            <label>
-                                <input type="radio" /> <p>Problemas Com a Familia</p>
-                                </label>
-                                <label>
-                                    <input type="radio" /> <p>Remorso</p>
-                                    </label>
-                                    <label>
-                                        <input type="radio" />  <p>Procrastinaçao</p>
-                                        </label>
-                                        <label>
-                                            <input type="radio" /> <p>Raiva</p>
-                                            </label>
-                                            <label>
-                                                <input type="radio" />
-                                                </label>
-                                                <label>
-                                                    <input type="radio" />
-                                                    </label>
-            </div>
-        </section>
-        </>
-    )
+                    <button 
+                        onClick={handleSubmit}
+                        disabled={selectedProblems.length === 0}
+                    >
+                        Ver orientações ({selectedProblems.length})
+                    </button>
+                </>
+            ) : (
+                <div className="results">
+                    <h2>Orientações para você</h2>
+                    
+                    <div className="advices">
+                        {problemsData
+                            .filter(problem => selectedProblems.includes(problem.name))
+                            .map(problem => (
+                                <div key={problem.name} className="advice-item">
+                                    <h3>{problem.name}</h3>
+                                    <p>{problem.advice}</p>
+                                </div>
+                            ))
+                        }
+                    </div>
+
+                    <button onClick={() => setShowResults(false)}>
+                        Voltar e selecionar novamente
+                    </button>
+                </div>
+            )}
+        </div>
+    );
 }
