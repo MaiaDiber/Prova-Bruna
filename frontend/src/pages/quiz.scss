@@ -6,7 +6,7 @@
     h1 {
         text-align: center;
         margin-bottom: 2rem;
-        color: #074a4d;
+        color: #333;
         font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     }
 }
@@ -41,26 +41,80 @@
     }
 
     span {
-        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
         font-size: 1rem;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+}
+
+.custom-feeling {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: #bfe0ff;
+    border-radius: 8px;
+
+    h3 {
+        margin-bottom: 1rem;
+        color: #333;
+        font-size: 1.1rem;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;        
+    }
+
+    .input-group {
+        display: flex;
+        gap: 0.5rem;
+
+        input {
+            flex: 1;
+            padding: 0.8rem;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+
+            &:focus {
+                outline: none;
+                border-color: #162a2b;
+            }
+
+            &::placeholder {
+                color: #999;
+                font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            }
+        }
+
+        .send-btn {
+            padding: 0.8rem 1.5rem;
+            background: #185099;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;            
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            white-space: nowrap;
+
+            &:hover {
+                background: #0b4a85;
+            }
+
+            &:disabled {
+                background: #ccc;
+                cursor: not-allowed;
+            }
+        }
     }
 }
 
 button {
     width: 100%;
     padding: 1rem;
-    background: #074a4d;
+    background: #162a2b;
     color: white;
     border: none;
     border-radius: 8px;
     font-size: 1rem;
     cursor: pointer;
-    transition: all 0.5s;
 
     &:hover {
-        border: 2px solid #074a4d;
-        background: #f0f8f8;
-        color: #074a4d;
+        background: #1a3a3b;
     }
 
     &:disabled {
@@ -69,11 +123,15 @@ button {
     }
 }
 
+.continue-btn {
+    margin-top: 1rem;
+}
+
 .results {
     h2 {
         text-align: center;
         margin-bottom: 2rem;
-        color: #162a2b;
+        color: #333;
         font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     }
 }
@@ -99,9 +157,30 @@ button {
     }
 
     p {
-        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
         line-height: 1.6;
         color: #555;
         margin: 0;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+}
+
+.custom-advice {
+    background: #e8f4f8;
+    padding: 1.5rem;
+    border-radius: 8px;
+    border-left: 4px solid #007bff;
+
+    h3 {
+        color: #007bff;
+        margin-bottom: 1rem;
+        font-size: 1.2rem;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+
+    p {
+        line-height: 1.6;
+        color: #074a4d;
+        margin: 0;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     }
 }

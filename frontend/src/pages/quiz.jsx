@@ -3,6 +3,7 @@ import './Quiz.scss';
 
 export default function Quiz() {
     const [selectedProblems, setSelectedProblems] = useState([]);
+    const [customFeeling, setCustomFeeling] = useState('');
     const [showResults, setShowResults] = useState(false);
 
     const problemsData = [
@@ -51,10 +52,12 @@ export default function Quiz() {
     };
 
     const handleSubmit = () => {
-        if (selectedProblems.length > 0) {
+        if (selectedProblems.length > 0 || customFeeling.trim() !== '') {
             setShowResults(true);
         }
     };
+
+ 
 
     return (
         <div className="quiz">
@@ -79,9 +82,29 @@ export default function Quiz() {
                         ))}
                     </div>
 
+                    {/* Campo para digitar sentimentos personalizados */}
+                    <div className="custom-feeling">
+                        <h3>Ou descreva o que você está sentindo:</h3>
+                        <div className="input-group">
+                            <input 
+                                type="text" 
+                                placeholder="Digite aqui o que está sentindo..."
+                                value={customFeeling}
+                                onChange={(e) => setCustomFeeling(e.target.value)}
+                                onKeyPress={(e) => {
+                                    if (e.key === 'Enter') {
+                                        handleCustomSubmit();
+                                    }
+                                }}
+                            />
+                            
+                        </div>
+                    </div>
+
                     <button 
                         onClick={handleSubmit}
-                        disabled={selectedProblems.length === 0}
+                        disabled={selectedProblems.length === 0 && customFeeling.trim() === ''}
+                        className="continue-btn"
                     >
                         Ver orientações ({selectedProblems.length})
                     </button>
@@ -100,6 +123,14 @@ export default function Quiz() {
                                 </div>
                             ))
                         }
+                        
+                        {/* Mostra o sentimento personalizado se o usuário digitou */}
+                        {customFeeling.trim() !== '' && (
+                            <div className="custom-advice">
+                                <h3>Seu sentimento: "{customFeeling}"</h3>
+                                <p>Obrigado por compartilhar isso conosco. É importante reconhecer e expressar seus sentimentos. Só tenho uma resposta... Siga o senhor jesus Cristo.</p>
+                            </div>
+                        )}
                     </div>
 
                     <button onClick={() => setShowResults(false)}>
